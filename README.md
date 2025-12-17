@@ -148,7 +148,7 @@ flowchart LR
    ODS / DWD / DWS / ADS を作成
 4. 生成した ADS を **TCHouse-D** に連携し、
    クエリで結果を確認
-5.（時間があれば）
+5. 時間があれば
    リアルタイム / Lakehouse / Notebook / BI の拡張ポイント紹介
 
 ---
