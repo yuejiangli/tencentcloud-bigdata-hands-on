@@ -53,10 +53,27 @@
 
 ```mermaid
 flowchart LR
-  A[業務DB<br/>MySQL] -->|バッチ取り込み| B[WeData<br/>データ統合・開発・スケジューリング]
-  B --> C[DLC<br/>Serverless SQL / ETL 実行エンジン]
-  C --> D[データレイヤリング<br/>ODS → DWD → DWS → ADS]
-  D --> E[TCHouse-D<br/>高速分析（OLAP）]
+  subgraph ControlPlane["WeData（統合管理・開発・スケジューリング）"]
+    W1[データ統合定義]
+    W2[ETL / SQL 開発]
+    W3[ワークフロー / 運用管理]
+  end
+
+  A[業務DB<br/>MySQL]
+  C[DLC<br/>Serverless SQL / ETL 実行]
+  D[データレイヤリング<br/>ODS → DWD → DWS → ADS]
+  E[TCHouse-D<br/>高速分析（OLAP）]
+  F[BI / ダッシュボード]
+
+  A -->|バッチ同期| C
+  C --> D
+  D --> E
+  E --> F
+
+  ControlPlane -. 管理・定義 .-> C
+  ControlPlane -. 管理・定義 .-> D
+  ControlPlane -. 管理・定義 .-> E
+
 ```
 
 ### 4.2 リアルタイム（拡張シナリオ）
